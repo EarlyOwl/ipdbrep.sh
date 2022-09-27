@@ -3,6 +3,16 @@ Report IPs to AbuseIPDB directly from the shell
 
 <img width="642" alt="Schermata 2022-09-27 alle 23 25 31" src="https://user-images.githubusercontent.com/49495410/192638837-9d0448a6-8583-4f12-82ba-9fda6346d485.png">
 
+## Contents
+- [What is this?](#what-is-this)
+- [How does it work?](#how-does-it-work)
+- [What do I need to make it work?](#what-do-i-need-to-make-it-work)
+- [Do I need to provide the API key each time?](#do-i-need-to-provide-the-api-key-each-time)
+- [How do I install Dialog?](how-do-i-install-dialog)
+- [How can I check if the script works without making an actual report?](#how-can-i-check-if-the-script-works-without-making-an-actual-report)
+- [The script is still not running](#the-script-is-still-not-running)
+- [Misc](#misc)
+
 ## What is this?
 I created this script with the only purpose of submitting an IP address to the [AbuseIPDB](https://abuseipdb.com) database directly from the shell but in a "guided" way with a pseudo-graphical interface (provided by Dialog).
 
@@ -41,14 +51,30 @@ Install it via [HomeBrew](https://docs.brew.sh/Installation) by running:
 brew install dialog
 ```
 
+## How can I check if the script works without making an actual report?
+As per [documentation](https://docs.abuseipdb.com/#test-ip-addresses), you can simply report **127.0.0.1**. The output should be similar to this:
+```json
+  {
+    "data": {
+      "ipAddress": "127.0.0.1",
+      "abuseConfidenceScore": 52
+    }
+  }
+```
+
 ## The script is still not running
 Make sure to make it executable:
 ```shell
 chmod +x ipdbrep.sh
 ```
 
-## Can I contribute? Can I reuse all/part of this script for other purposes?
+## Misc
+
+##### Can I contribute? Can I reuse all/part of this script for other purposes?
 Yes and yes.
 
-## This sucks / You could have done X instead of X!
+##### This sucks / You could have done X instead of X!
 I'm eager to learn, open an issue or a  pull request to suggest an improvement / fix.
+
+##### Where I can find the report categories?
+You can find them [here](https://www.abuseipdb.com/categories).
