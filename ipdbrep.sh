@@ -31,7 +31,7 @@ if [ $save_toggle = "save" ]; then
   output_file_name="$report_ip""_$current_timestamp.txt"
   #Pass the POST request output to the txt file
   echo $api_msgbox > $output_file_name
-  #
+  #Send a confirmation (showing the file name) to the user
   dialog --title "File created successfully" --backtitle "$current_version" --msgbox "Request output saved to file $output_file_name" 0 0
   #Finally invoke the function to ask if the user needs to input additional entries
   askforentry
