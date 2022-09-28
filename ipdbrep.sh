@@ -9,7 +9,7 @@ exec 3>&1; report_ip=$(dialog --title "[!] Input the required parameters" --back
 exec 3>&1; report_categories=$(dialog --title "[!] Input the required parameters" --backtitle "$current_version" --inputbox "Input the report category(ies). Comma separated for multiple categories" 0 0 2>&1 1>&3); exec 3>&-;
 exec 3>&1; report_comment=$(dialog --title "[!] Input the required parameters" --backtitle "$current_version" --inputbox "(OPTIONAL) Input the report comment. Max 1024 characters" 0 0 2>&1 1>&3); exec 3>&-;
 #Creating a temporary txt to store cURL results
-api_output=$(mktemp api_output.txt)
+api_output=$(mktemp)
 #Send POST request
 curl https://api.abuseipdb.com/api/v2/report \
   --data-urlencode "ip=$report_ip" \
