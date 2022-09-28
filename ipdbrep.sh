@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Current version of the script, printed in the backtitle
-current_version="v1.0-beta"
+current_version="v1.1-beta"
 
 #Function to get parameters for the entry
 function addentry {
@@ -23,8 +23,22 @@ api_msgbox=$(cat $api_output)
 dialog --title "POST request output" --backtitle "$current_version" --msgbox "$api_msgbox" 0 0
 #Remove the temp file
 rm "$api_output"
-#Invoke the function to ask if the user needs to input additional entries
-askforentry
+#Check if the positional argument "save" was provided
+if [ $save_toggle = "save" ]; then
+  #If yes, save the output to a txt file in the current directory.
+  #The file name is made by the report ip + a timestamp in a ddmmyyyy_hhmmss format
+  current_timestamp=$(date +%d%m%Y_%H%M%S)
+  output_file_name="$report_ip""_$current_timestamp.txt"
+  #Pass the POST request output to the txt file
+  echo $api_msgbox > $output_file_name
+  #
+  dialog --title "File created successfully" --backtitle "$current_version" --msgbox "Request output saved to file $output_file_name" 0 0
+  #Finally invoke the function to ask if the user needs to input additional entries
+  askforentry
+else
+  #Invoke the function to ask if the user needs to input additional entries
+  askforentry
+fi
 }
 
 #Function to ask the user if he wants to input another entry
@@ -61,5 +75,7 @@ function checkapikey {
   fi
 }
 
+#Pass the first positional parameter (should be "save") into a variable
+save_toggle=$1
 #Invoke the first function
 checkapikey
